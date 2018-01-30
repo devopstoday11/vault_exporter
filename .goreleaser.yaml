@@ -1,0 +1,20 @@
+builds:
+  -
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+    flags: -a -tags netgo
+archive:
+  format: binary
+release:
+  github:
+    owner: jetstack
+    name: vault_exporter
+
+sign:
+  signature: "${artifact}.asc"
+  artifacts: all
+  args: ["-u", "tech+releases@jetstack.io", "--output", "${signature}", "--detach-sign", "--armor",  "${artifact}"]
